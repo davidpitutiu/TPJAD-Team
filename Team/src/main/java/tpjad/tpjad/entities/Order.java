@@ -36,7 +36,6 @@ public class Order {
     private String deliveryAddress;
     @Column(name = "total")
     private BigDecimal total;
-    // Constructors
     public Order() {}
 
     public Order(User user, Timestamp orderDate, String status, String paymentMethod, String deliveryAddress, BigDecimal total) {
@@ -56,7 +55,6 @@ public class Order {
         this.total = total;
     }
 
-    // Getters and Setters
     public Integer getId() {
         return id;
     }

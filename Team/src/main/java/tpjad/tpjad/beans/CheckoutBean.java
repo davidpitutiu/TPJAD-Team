@@ -38,7 +38,6 @@ public class CheckoutBean {
     private String paymentMethod;
     private String deliveryAddress;
 
-    // Getters and Setters
     public String getPaymentMethod() {
         return paymentMethod;
     }
@@ -54,12 +53,11 @@ public class CheckoutBean {
     public void setDeliveryAddress(String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
-    private BigDecimal totalPrice; // Field to hold the total price
+    private BigDecimal totalPrice;
 
-    // Getter method for totalPrice
+
     public BigDecimal getTotalPrice() {
-        // Logic to calculate the total price if not already done
-        // This calculation logic could be moved here if you want to ensure it's always up-to-date when accessed
+
         return totalPrice;
     }
     public void setTotalPrice(BigDecimal totalPrice) {
@@ -96,16 +94,15 @@ public class CheckoutBean {
                 Product product = entityManager.find(Product.class, item.getProductId());
                 if (product != null && product.getStock() >= item.getQuantity()) {
                     product.setStock(product.getStock() - item.getQuantity());
-                    entityManager.merge(product); // Update product with new stock
+                    entityManager.merge(product);
                 } else {
-                    // Handle stock issue or product not found
                     context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Stock issue for product ID " + item.getProductId(), null));
-                    return null; // Optionally redirect to a different page or handle the error differently
+                    return null;
                 }
             }
 
-            orderService.createOrder(order); // Persist the order
-            cartService.clearCartByUserId(userId); // Clear the cart
+            orderService.createOrder(order);
+            cartService.clearCartByUserId(userId);
 
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Order processed successfully. Cart is now empty.", null));
             return "orderConfirmation?faces-redirect=true";
@@ -117,14 +114,13 @@ public class CheckoutBean {
 
 
     private void clearCart(Long userId) {
-        // Implementation to clear the user's cart
     }
     public String checkout() {
         FacesContext context = FacesContext.getCurrentInstance();
         Long userId = (Long) context.getExternalContext().getSessionMap().get("userId");
         if (userId == null) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "User not logged in", null));
-            return null; // Or navigate to login page.
+            return null;
         }
 
         List<Cart> cartItems = cartService.getCartItemsByUserId(userId);
@@ -141,13 +137,10 @@ public class CheckoutBean {
         }
 
         if (stockIssue) {
-            return null; // Stay on the cart page to let the user review changes.
+            return null;
         }
 
-        // Proceed with the checkout process if no stock issues.
-        // Perform operations like creating an order, clearing the cart, sending confirmation, etc.
-
-        return "checkoutSuccess"; // Navigate to the checkout success page.
+        return "checkoutSuccess";
     }
 }
 

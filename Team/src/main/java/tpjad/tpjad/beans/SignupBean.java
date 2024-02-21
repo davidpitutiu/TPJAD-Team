@@ -36,7 +36,6 @@ public class SignupBean {
         this.confirmPassword = confirmPassword;
     }
 
-    // Getter and setter for password
     public String getPassword() {
         return password;
     }
@@ -45,7 +44,6 @@ public class SignupBean {
         this.password = password;
     }
 
-    // Getter and setter for name
     public String getName() {
         return name;
     }
@@ -54,7 +52,6 @@ public class SignupBean {
         this.name = name;
     }
 
-    // Getter and setter for email
     public String getEmail() {
         return email;
     }
@@ -63,7 +60,6 @@ public class SignupBean {
         this.email = email;
     }
 
-    // Getter and setter for phone
     public String getPhone() {
         return phone;
     }
@@ -72,7 +68,6 @@ public class SignupBean {
         this.phone = phone;
     }
 
-    // Getter and setter for address
     public String getAddress() {
         return address;
     }
@@ -119,9 +114,9 @@ public class SignupBean {
             Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email");
             query.setParameter("email", email);
             query.getSingleResult();
-            return true; // Email found, return true
+            return true;
         } catch (NoResultException e) {
-            return false; // No result found, email does not exist
+            return false;
         }
     }
 }

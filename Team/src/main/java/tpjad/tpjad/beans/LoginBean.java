@@ -1,4 +1,3 @@
-// LoginBean.java
 package tpjad.tpjad.beans;
 
 import jakarta.ejb.EJB;

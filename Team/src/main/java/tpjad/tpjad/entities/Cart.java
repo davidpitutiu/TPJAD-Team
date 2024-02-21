@@ -25,18 +25,15 @@ public class Cart {
 
     private Integer quantity;
 
-    // Default constructor
     public Cart() {
     }
 
-    // Constructor with fields
     public Cart(User user, Product product, Integer quantity) {
         this.user = user;
         this.product = product;
         this.quantity = quantity;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }

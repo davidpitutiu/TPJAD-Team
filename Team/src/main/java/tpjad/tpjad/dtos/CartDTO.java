@@ -4,17 +4,14 @@ public class CartDTO {
     private Integer productId;
     private Integer quantity;
 
-    // Default constructor
     public CartDTO() {
     }
 
-    // Constructor with fields
     public CartDTO(Integer productId, Integer quantity) {
         this.productId = productId;
         this.quantity = quantity;
     }
 
-    // Getters and Setters
     public Integer getProductId() {
         return productId;
     }

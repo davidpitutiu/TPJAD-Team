@@ -17,15 +17,14 @@ import java.util.ArrayList;
 @Named
 @RequestScoped
 public class CartBean {
-    private BigDecimal totalPrice; // Field to hold the total price
+    private BigDecimal totalPrice;
 
-    // Setter method for totalPrice
+
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
-    private Long cartItemId; // Temporary holder for the ID
+    private Long cartItemId;
 
-    // Getter and setter for cartItemId
     public void setCartItemId(Long cartItemId) {
         this.cartItemId = cartItemId;
     }
@@ -43,7 +42,7 @@ public class CartBean {
 
     public void addToCart(Long productId) {
         FacesContext context = FacesContext.getCurrentInstance();
-        Long userId = (Long) context.getExternalContext().getSessionMap().get("userId"); // Changed to Long
+        Long userId = (Long) context.getExternalContext().getSessionMap().get("userId");
         System.out.println("User" + userId);
 
         if (userId == null) {
@@ -51,11 +50,11 @@ public class CartBean {
             return;
         }
 
-        User user = userService.findUserById(userId); // Now correctly uses Long
+        User user = userService.findUserById(userId);
         Product product = productService.findProductById(productId);
 
         if (user != null && product != null) {
-            Cart cartItem = new Cart(user, product, 1); // Assuming a quantity of 1 for simplicity
+            Cart cartItem = new Cart(user, product, 1);
             cartService.addCartItem(cartItem);
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Product added to cart successfully", null));
         } else {
@@ -102,13 +101,13 @@ public class CartBean {
             Cart cartItem = cartService.findCartItemById(cartItemId);
             if (cartItem != null) {
                 if (cartItem.getQuantity() > 1) {
-                    // If quantity is greater than 1, decrease it
+
                     cartItem.setQuantity(cartItem.getQuantity() - 1);
                     cartService.updateCartItem(cartItem);
                     FacesContext.getCurrentInstance().addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_INFO, "Quantity decreased successfully", null));
                 } else {
-                    // If quantity is 1, delete the item from the cart
+
                     cartService.deleteCartItem(cartItem);
                     FacesContext.getCurrentInstance().addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_INFO, "Item removed from cart", null));
@@ -128,7 +127,7 @@ public class CartBean {
         BigDecimal totalPrice = BigDecimal.ZERO;
         List<Cart> cartItems = getCartItems();
         for (Cart item : cartItems) {
-            // Convert double to BigDecimal
+
             BigDecimal price = BigDecimal.valueOf(item.getProduct().getPrice());
             BigDecimal quantity = BigDecimal.valueOf(item.getQuantity());
             BigDecimal itemTotal = price.multiply(quantity);
@@ -145,17 +144,17 @@ public class CartBean {
 
     public String prepareCheckout() {
         List<CheckoutItem> checkoutItems = new ArrayList<>();
-        // Populate checkout items
+
         for (Cart item : getCartItems()) {
             checkoutItems.add(new CheckoutItem(item.getProduct().getId(), item.getQuantity()));
         }
-        // Store in session
+
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("checkoutItems", checkoutItems);
         return "checkout?faces-redirect=true";
     }
 
 
-    // Inner class to hold product ID and quantity for checkout
+
     public static class CheckoutItem {
         private Long productId;
         private Integer quantity;
@@ -165,7 +164,7 @@ public class CartBean {
             this.quantity = quantity;
         }
 
-        // Getters and Setters
+
         public Long getProductId() {
             return productId;
         }

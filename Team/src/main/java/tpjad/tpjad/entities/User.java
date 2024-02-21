@@ -22,7 +22,6 @@ public class User {
     @Column(columnDefinition = "TEXT")
     private String address;
 
-    // Constructori, getteri și setteri
     public User() {}
 
     public User(String password, String name, String email, String phone, String address) {
@@ -33,13 +32,11 @@ public class User {
         this.address = address;
     }
 
-    // Getteri și setteri
-    // Id
+
     public Long getId() {
         return id;
     }
 
-    // Password
     public String getPassword() {
         return password;
     }
@@ -48,7 +45,6 @@ public class User {
         this.password = password;
     }
 
-    // Name
     public String getName() {
         return name;
     }
@@ -57,7 +53,6 @@ public class User {
         this.name = name;
     }
 
-    // Email
     public String getEmail() {
         return email;
     }
@@ -66,7 +61,6 @@ public class User {
         this.email = email;
     }
 
-    // Phone
     public String getPhone() {
         return phone;
     }
@@ -75,7 +69,6 @@ public class User {
         this.phone = phone;
     }
 
-    // Address
     public String getAddress() {
         return address;
     }

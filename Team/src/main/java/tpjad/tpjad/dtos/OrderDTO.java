@@ -9,9 +9,8 @@ public class OrderDTO {
     private String status;
     private String paymentMethod;
     private String deliveryAddress;
-    private BigDecimal total; // New field for the total amount
+    private BigDecimal total;
 
-    // Constructors
     public OrderDTO() {}
 
     public OrderDTO(Integer userId, Timestamp orderDate, String status, String paymentMethod, String deliveryAddress, BigDecimal total) {
@@ -20,10 +19,9 @@ public class OrderDTO {
         this.status = status;
         this.paymentMethod = paymentMethod;
         this.deliveryAddress = deliveryAddress;
-        this.total = total; // Initialize the total field
+        this.total = total;
     }
 
-    // Getters and Setters
     public Integer getUserId() {
         return userId;
     }

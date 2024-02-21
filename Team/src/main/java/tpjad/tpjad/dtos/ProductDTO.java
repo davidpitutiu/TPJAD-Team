@@ -6,7 +6,6 @@ public class ProductDTO {
     private double price;
     private int stock;
 
-    // Constructors
     public ProductDTO() {
     }
 
@@ -17,7 +16,6 @@ public class ProductDTO {
         this.stock = stock;
     }
 
-    // Getters and setters
     public String getName() {
         return name;
     }

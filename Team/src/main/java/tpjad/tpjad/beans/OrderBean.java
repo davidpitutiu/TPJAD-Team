@@ -20,6 +20,6 @@ public class OrderBean {
         if (userId != null) {
             return orderService.getOrdersByUserId(userId);
         }
-        return null; // or empty list
+        return null;
     }
 }

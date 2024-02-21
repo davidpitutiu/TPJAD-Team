@@ -12,7 +12,7 @@ public class ProductBean {
     private ProductDTO productDTO = new ProductDTO();
 
     @EJB
-    private ProductServiceEJB productService; // Directly use ProductServiceEJB
+    private ProductServiceEJB productService;
 
     public ProductDTO getProductDTO() {
         return productDTO;
@@ -25,6 +25,6 @@ public class ProductBean {
     public String addProduct() {
         Product product = new Product(productDTO.getName(), productDTO.getDescription(), productDTO.getPrice(), productDTO.getStock());
         productService.addProduct(product);
-        return "productList"; // Navigate accordingly
+        return "productList";
     }
 }

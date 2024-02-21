@@ -1,6 +1,5 @@
 package tpjad.tpjad.dtos;
 
-import java.sql.Timestamp;
 
 public class UserDTO {
     private String password;
@@ -20,7 +19,6 @@ public class UserDTO {
     }
 
 
-    // Password
     public String getPassword() {
         return password;
     }
@@ -29,7 +27,6 @@ public class UserDTO {
         this.password = password;
     }
 
-    // Name
     public String getName() {
         return name;
     }
@@ -38,7 +35,6 @@ public class UserDTO {
         this.name = name;
     }
 
-    // Email
     public String getEmail() {
         return email;
     }
@@ -47,7 +43,6 @@ public class UserDTO {
         this.email = email;
     }
 
-    // Phone
     public String getPhone() {
         return phone;
     }
@@ -56,7 +51,6 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    // Address
     public String getAddress() {
         return address;
     }

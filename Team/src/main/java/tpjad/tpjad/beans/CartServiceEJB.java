@@ -12,7 +12,7 @@ import java.util.List;
 public class CartServiceEJB{
 
     @PersistenceContext(unitName = "Store")
-    private EntityManager entityManager; // Moved @PersistenceContext annotation here
+    private EntityManager entityManager;
 
     public List<Cart> getCartItemsByUserId(Long userId) {
         return entityManager.createQuery("SELECT c FROM Cart c WHERE c.user.id = :userId", Cart.class)
@@ -23,7 +23,7 @@ public class CartServiceEJB{
     public void addCartItem(Cart cartItem) {
         try {
             entityManager.persist(cartItem);
-            System.out.println("Cart item added successfully: " + cartItem); // Add logging
+            System.out.println("Cart item added successfully: " + cartItem);
         } catch (Exception e) {
             e.printStackTrace();
         }

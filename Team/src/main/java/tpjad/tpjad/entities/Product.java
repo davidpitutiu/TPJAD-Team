@@ -13,7 +13,6 @@ public class Product {
     private double price;
     private int stock;
 
-    // Constructors
     public Product() {
     }
 
@@ -24,7 +23,6 @@ public class Product {
         this.stock = stock;
     }
 
-    // Getters and setters
     public Long getId() {
         return id;
     }
