@@ -10,8 +10,8 @@ import java.util.List;
 @Named
 @RequestScoped
 public class ProductDisplayBean {
-
     private List<Product> products;
+    private String searchTerm;
 
     @EJB
     private ProductServiceEJB productService;
@@ -21,8 +21,23 @@ public class ProductDisplayBean {
         products = productService.getAllProducts();
     }
 
+    public void searchProducts() {
+        if (searchTerm != null && !searchTerm.isEmpty()) {
+            products = productService.searchProductsByName(searchTerm);
+        } else {
+            products = productService.getAllProducts();
+        }
+    }
+
     public List<Product> getProducts() {
         return products;
     }
-}
 
+    public String getSearchTerm() {
+        return searchTerm;
+    }
+
+    public void setSearchTerm(String searchTerm) {
+        this.searchTerm = searchTerm;
+    }
+}

@@ -3,12 +3,12 @@ package tpjad.tpjad.beans;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import tpjad.tpjad.entities.Product;
 import java.util.List;
 
 @Stateless
 public class ProductServiceEJB {
-
     @PersistenceContext(unitName = "Store")
     private EntityManager entityManager;
 
@@ -34,7 +34,14 @@ public class ProductServiceEJB {
             entityManager.remove(product);
         }
     }
+
     public Product findProductById(Long productId) {
         return entityManager.find(Product.class, productId);
+    }
+
+    public List<Product> searchProductsByName(String name) {
+        TypedQuery<Product> query = entityManager.createQuery("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(:name)", Product.class);
+        query.setParameter("name", "%" + name + "%");
+        return query.getResultList();
     }
 }

@@ -43,6 +43,7 @@ public class CartBean {
     public void addToCart(Long productId) {
         FacesContext context = FacesContext.getCurrentInstance();
         Long userId = (Long) context.getExternalContext().getSessionMap().get("userId");
+
         System.out.println("User" + userId);
 
         if (userId == null) {
