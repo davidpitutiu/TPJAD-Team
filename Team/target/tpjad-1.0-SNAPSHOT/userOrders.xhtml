@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+   <title>User Orders</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</h:head>
+<h:body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+         <h:link value="Home" outcome="/home" class="navbar-brand" />
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+               <h:link value="Cart" outcome="/cart" class="nav-item nav-link" />
+               <h:link value="Orders" outcome="/userOrders" class="nav-item nav-link" />
+               <h:link value="Add Products" outcome="/addProduct" rendered="#{sessionScope.userId == 1}" class="nav-item nav-link" />
+               <h:form class="form-inline my-2 my-lg-0">
+                  <h:commandLink value="Logout" action="#{logoutBean.logout}" class="btn btn-outline-success my-2 my-sm-0" />
+               </h:form>
+            </div>
+         </div>
+      </div>
+   </nav>
+
+   <div class="container mt-4">
+      <h1>Your Orders</h1>
+      <h:dataTable value="#{orderBean.userOrders}" var="order" styleClass="table table-hover">
+         <h:column>
+            <f:facet name="header">Order ID</f:facet>
+            #{order.id}
+         </h:column>
+         <h:column>
+            <f:facet name="header">Order Date</f:facet>
+            #{order.orderDate}
+         </h:column>
+         <h:column>
+            <f:facet name="header">Status</f:facet>
+            #{order.status}
+         </h:column>
+         <h:column>
+            <f:facet name="header">Total</f:facet>
+            #{order.total}
+         </h:column>
+      </h:dataTable>
+   </div>
+
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</h:body>
+</html>

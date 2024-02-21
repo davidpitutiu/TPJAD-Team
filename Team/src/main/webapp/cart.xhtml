@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</h:head>
+<h:body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <h:link value="Home" outcome="/home" class="navbar-brand" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <h:link value="Cart" outcome="/cart" class="nav-item nav-link" />
+                    <h:link value="Orders" outcome="/userOrders" class="nav-item nav-link" />
+                    <h:link value="Add Products" outcome="/addProduct" rendered="#{sessionScope.userId == 1}" class="nav-item nav-link" />
+                    <h:form class="form-inline my-2 my-lg-0">
+                        <h:commandLink value="Logout" action="#{logoutBean.logout}" class="btn btn-outline-success my-2 my-sm-0" />
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2>Cart Items</h2>
+        <h:messages globalOnly="true" showDetail="true" showSummary="false" class="alert alert-warning" role="alert"/>
+        <h:form class="mb-3">
+            <h:commandButton value="Update Cart" action="#{cartBean.updateCart}" class="btn btn-info">
+                <f:ajax render=":cartForm:cartTable" />
+            </h:commandButton>
+        </h:form>
+        <h:form id="cartForm">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ui:repeat value="#{cartBean.cartItems}" var="cartItem">
+                    <tr>
+                        <td>#{cartItem.product.name}</td>
+                        <td>$#{cartItem.product.price}</td>
+                        <td>#{cartItem.quantity}</td>
+                        <td>
+                            <h:commandButton value="Increase" action="#{cartBean.increaseQuantity}" class="btn btn-sm btn-primary mr-1">
+                                <f:setPropertyActionListener target="#{cartBean.cartItemId}" value="#{cartItem.id}" />
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                            <h:commandButton value="Decrease" action="#{cartBean.decreaseQuantity}" class="btn btn-sm btn-secondary">
+                                <f:setPropertyActionListener target="#{cartBean.cartItemId}" value="#{cartItem.id}" />
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                        </td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+            <h:outputText value="Total Price: " class="h4"/>
+            <h:outputText value="#{cartBean.totalPrice}" class="h4">
+                <f:convertNumber type="currency" currencySymbol="$" />
+            </h:outputText>
+        </h:form>
+        <h:form>
+            <h:commandButton value="Check" action="#{checkoutBean.checkout}" class="btn btn-success mt-2" />
+        </h:form>
+        <h:form>
+            <h:commandButton value="Checkout" action="#{cartBean.prepareCheckout}" class="btn btn-success mt-2" />
+        </h:form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</h:body>
+</html>

@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</h:head>
+<h:body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h2 class="text-center mb-4">Login</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <h:form>
+                            <div class="form-group">
+                                <h:outputLabel for="email" value="Email:" class="form-label"/>
+                                <h:inputText id="email" value="#{loginBean.email}" required="true" requiredMessage="Email is required" styleClass="form-control"/>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel for="password" value="Password:" class="form-label"/>
+                                <h:inputSecret id="password" value="#{loginBean.password}" required="true" requiredMessage="Password is required" styleClass="form-control"/>
+                            </div>
+                            <h:commandButton value="Login" action="#{loginBean.login}" styleClass="btn btn-primary w-100"/>
+                            <h:messages styleClass="text-danger"/>
+                        </h:form>
+                        <div class="mt-3 text-center">
+                            <h:link value="Sign up" outcome="/signup" styleClass="btn btn-link"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>
